@@ -38,9 +38,10 @@ var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azu
 // This default message handler is invoked if the user's utterance doesn't
 // match any intents handled by other dialogs.
 // var bot = new builder.UniversalBot(connector);
-var bot = new builder.UniversalBot(connector, function (session, args) {
-    session.send('You reached the default message handler. You said \'%s\'.', session.message.text);
-});
+var bot = new builder.UniversalBot(connector);
+// var bot = new builder.UniversalBot(connector, function (session, args) {
+//     session.send('You reached the default message handler. You said \'%s\'.', session.message.text);
+// });
 bot.set('storage', tableStorage);
 
 // Make sure you add code to validate these fields
@@ -56,7 +57,8 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 
 // Add the recognizer to the bot
 bot.recognizer(recognizer); 
-var intents = new builder.IntentDialog({ recognizers: [recognizer] })
+var intents = new builder.IntentDialog({ recognizers: [recognizer] });
+
 bot.dialog('AssessmentDue', [
     function (session) {
         builder.Prompts.text(session, 'Looking up assessment dates...');
