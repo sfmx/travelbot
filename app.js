@@ -175,3 +175,5 @@ bot.dialog('AssessmentDue', [
 //         .text(review.text)
 //         .images([new builder.CardImage().url(review.image)]);
 // }
+
+bot.dialog('/', intents); 
