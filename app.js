@@ -57,6 +57,15 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 // Add the recognizer to the bot
 bot.recognizer(recognizer); 
 
+bot.dialog('AssessmentDue', [
+    function (session) {
+        builder.Prompts.text(session, 'Looking up assessment dates...');
+    },
+    function (session, results) {
+        session.endDialog(`I found two assessment items for semester 1 2018`);
+    }
+]);
+
 bot.dialog('SearchHotels', [
     function (session, args, next) {
         session.send('Welcome to the Hotels finder! We are analyzing your message: \'%s\'', session.message.text);
@@ -130,6 +139,15 @@ bot.dialog('ShowHotelsReviews', function (session, args) {
 }).triggerAction({
     matches: 'ShowHotelsReviews'
 });
+
+bot.dialog('greetings', [
+    function (session) {
+        builder.Prompts.text(session, 'Hi! What is your name?');
+    },
+    function (session, results) {
+        session.endDialog(`Hello ${results.response}!`);
+    }
+]);
 
 bot.dialog('Help', function (session) {
     session.endDialog('Hi! Try asking me things like \'search hotels in Seattle\', \'search hotels near LAX airport\' or \'show me the reviews of The Bot Resort\'');
