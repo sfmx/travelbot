@@ -56,7 +56,7 @@ var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 
 // Add the recognizer to the bot
 bot.recognizer(recognizer); 
-
+var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 bot.dialog('AssessmentDue', [
     function (session) {
         builder.Prompts.text(session, 'Looking up assessment dates...');
